@@ -24,10 +24,9 @@ List<String> getCompartments(String s) {
 String getMatchingLetter(List<String> compartments) {
   final firstCompartment = Set.from(compartments[0].split(''));
   for (final letter in compartments[1].split('')) {
-    if (!firstCompartment.add(letter)) {
+    if (firstCompartment.contains(letter)) {
       return letter;
     }
-    firstCompartment.remove(letter);
   }
   throw FormatException('The compartments had no matching Letter!');
 }
