@@ -5,7 +5,9 @@ const inPath = 'resources/day3.txt';
 void day3() {
   final inFile = File(inPath);
   final part1 = task1(inFile);
+  final part2 = task2(inFile);
   print('Day3 Part1: $part1');
+  print('Day3 Part2: $part2');
 }
 
 int task1(File input) => input
@@ -15,6 +17,37 @@ int task1(File input) => input
     .map((compartments) => getMatchingLetter(compartments))
     .map((letter) => getLetterVal(letter))
     .fold(0, (previousValue, val) => previousValue + val);
+
+int task2(File input) => input
+    .readAsStringSync()
+    .split('\n')
+    .fold([<String>[]], (container, line) {
+      if (container.last.length == 3) {
+        container.add([line]);
+      } else {
+        container.last.add(line);
+      }
+      return container;
+    })
+    .map((rucksacks) => getMatchingLetterForThree(rucksacks))
+    .map((letter) => getLetterVal(letter))
+    .fold(0, (previousValue, val) => previousValue + val);
+
+String getMatchingLetterForThree(List<String> rucksacks) {
+  final firstRucksack = Set.from(rucksacks[0].split(''));
+  final matchingLetters = <String>{};
+  rucksacks[1].split('').forEach((letter) {
+    if (firstRucksack.contains(letter)) {
+      matchingLetters.add(letter);
+    }
+  });
+  for (final letter in rucksacks[2].split('')) {
+    if (matchingLetters.contains(letter)) {
+      return letter;
+    }
+  }
+  throw FormatException('The rucksacks had no matching Letter!');
+}
 
 List<String> getCompartments(String s) {
   var half = (s.length ~/ 2);

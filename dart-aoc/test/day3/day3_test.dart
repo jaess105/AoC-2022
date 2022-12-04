@@ -4,6 +4,31 @@ import 'package:dart_aoc/day3/day3.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('task 2', () {
+    test('Full execution on test Input', () {
+      expect(task2(File('resources/day3_test.txt')), 70);
+    });
+    group('identify common between three rucksacks', () {
+      test('First example input from AoC', () {
+        final input = [
+          'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+          'ttgJtRGJQctTZtZT',
+          'CrZsJsPPZsGzwwsLwLmpwMDw',
+        ];
+        final matchingLetter = getMatchingLetterForThree(input);
+        expect(matchingLetter, 'Z');
+      });
+      test('Second example input from AoC', () {
+        final input = [
+          'vJrwpWtwJgWrhcsFMMfFFhFp',
+          'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+          'PmmdzqPrVvPwwTWBwg',
+        ];
+        final matchingLetter = getMatchingLetterForThree(input);
+        expect(matchingLetter, 'r');
+      });
+    });
+  });
   group('task 1', () {
     test('Full execution on test Input', () {
       expect(task1(File('resources/day3_test.txt')), 157);
