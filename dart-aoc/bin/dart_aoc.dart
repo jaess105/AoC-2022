@@ -1,5 +1,5 @@
-import 'package:dart_aoc/day5/day5.dart';
+import 'package:dart_aoc/day6/day6.dart';
 
 void main(List<String> arguments) {
-  day5();
+  day6();
 }
